@@ -1,0 +1,14 @@
+%h2 Login
+
+= form_tag login_path, :method => :post do
+  %table
+    %tr
+      %td= label :moviegoer, :email, 'Email'
+      %td= text_field :moviegoer, 'email'
+
+    %tr
+      %td= label :moviegoer, :email, 'Password'
+      %td= password_field :moviegoer, 'password'
+
+    %tr
+      %td{:colspan => 2}=submit_tag 'Login'
