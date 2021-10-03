@@ -63,7 +63,7 @@ class MoviesController < ApplicationController
   end
 
   def enforce_login
-    redirect_to login_path unless logged_in?
+    redirect_to login_path if not logged_in?
   end
 
   def set_current_user

@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
+
   def new
-    #render 'new'
+    return unless logged_in?
+    flash[:warning] = "Already logged in!"
+    redirect_to movies_path if logged_in?
   end
 
   def auth
