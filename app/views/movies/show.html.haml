@@ -15,6 +15,8 @@
 
 = link_to 'Edit info ', edit_movie_path(@movie)
 |
+= link_to 'Add review', new_movie_review_path(@movie)
+|
 = link_to 'Delete', movie_path(@movie), :method => :delete, data: {confirm: 'Are you sure?'}
 |
 = link_to 'Back to movie list', movies_path

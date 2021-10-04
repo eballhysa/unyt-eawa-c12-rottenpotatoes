@@ -66,11 +66,6 @@ class MoviesController < ApplicationController
     redirect_to login_path if not logged_in?
   end
 
-  def set_current_user
-    mg_id = session[:current_mg_id]
-    @current_moviegoer = Moviegoer.find mg_id if logged_in?
-  end
-
   private
   def movie_params
     params.require(:movie).permit(:title, :rating, :release_date)
