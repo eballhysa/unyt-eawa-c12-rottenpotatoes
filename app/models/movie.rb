@@ -11,6 +11,17 @@ class Movie < ApplicationRecord
   validate :released_1930_or_later # uses custom validator below
   validates :rating, inclusion: {in: Movie.all_ratings}, unless: :grandfathered?
 
+  scope :with_good_reviews, lambda {|threshold|
+    Movie
+      .joins(:reviews)
+      .group(:id)
+      .having(['AVG(reviews.potatoes) > ?', threshold.to_i])
+  }
+
+  scope :for_kids, lambda {
+    Movie.where('rating in (?)', %w(G PG))
+  }
+
   def average_rating
     self.reviews.average(:potatoes).to_f
   end
@@ -31,6 +42,6 @@ class Movie < ApplicationRecord
   before_save :capitalize_title
   def capitalize_title
     self.title = self.title.split(/\s+/).map(&:downcase).
-        map(&:capitalize).join(' ')
+                 map(&:capitalize).join(' ')
   end
 end
